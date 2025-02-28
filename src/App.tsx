@@ -1,35 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+
+import './App.css';
+import { useState } from 'react';
+import { useStore } from './lib/useStore';
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>Different generic APIs and components</h1>
+      <FirstComponent />
+      <SecondComponent />
     </>
   )
 }
+
+function FirstComponent() {
+  const [myKey, setMyKey] = useStore('myKey');
+  const [value, setValue] = useState(myKey == null ? '' : myKey);
+  return (
+    <>
+      <h2>Component that set a value in localStorage using the API</h2>
+      <input value={value} onChange={(e) => setValue(e.target.value)} />
+      <button onClick={() => setMyKey(value)}>
+        Save
+      </button>
+    </>
+  );
+}
+
+function SecondComponent() {
+  const [myKey] = useStore('myKey');
+  return (
+    <>
+      <h2>Component that receive any update and display it instantly</h2>
+      <span>{myKey}</span>
+    </>
+  );
+}
+
 
 export default App
