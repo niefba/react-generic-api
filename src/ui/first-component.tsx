@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { useStore } from '../lib/useStore';
 
+/*
+* Component that set a value for 'myKey' in localStorage using the API
+*/
 export function FirstComponent() {
     const [myKey, setMyKey] = useStore('myKey');
     const [value, setValue] = useState('');
