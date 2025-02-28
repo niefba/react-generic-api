@@ -1,11 +1,11 @@
 import { useSyncExternalStore } from 'react';
 
 
-export function useStore(keyword: string) {
+export function useStore(key: string) {
     const value = useSyncExternalStore(subscribe, getSnapshot);
 
     function getSnapshot() {
-        return localStorage.getItem(keyword);
+        return localStorage.getItem(key);
     }
     
     function subscribe(callback: () => void) {
@@ -15,13 +15,13 @@ export function useStore(keyword: string) {
         };
     }
     
-    function setKeyword(value: string) {
-        localStorage.setItem(keyword, value);
+    function setKey(value: string) {
+        localStorage.setItem(key, value);
         window.dispatchEvent( new Event('storage') ) 
     }
     
     return [
         value,
-        (s: string) => {setKeyword(s)}
+        (s: string) => {setKey(s)}
     ] as const;
 }
