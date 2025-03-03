@@ -3,6 +3,10 @@ import {useState} from 'react';
 import {FirstComponent} from './ui/first-component';
 import {SecondComponent} from './ui/second-component';
 import { Dialog } from './ui/dialog';
+import { InputAutoFilter } from './ui/input-auto-filter';
+import data from './test/data.json';
+
+
 
 function App() {
   const [showDialog, setShowDialog] = useState(false);
@@ -43,13 +47,9 @@ function App() {
       <p>Some content</p>
       <p>Some content</p>
       <p>Some content</p>
-      <p>Some content</p>
-      <p>Some content</p>
-      <p>Some content</p>
-      <p>Some content</p>
-      <p>Some content</p>
-      <p>Some content</p>
-      <p>Some content</p>
+
+      <InputAutoFilter data={data} property='name' />
+
     </div>
   )
 }
