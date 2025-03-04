@@ -17,6 +17,7 @@ export function InputAutoFilter({data, property, valueChange, value}: {data: ISt
 
     return (
         <div className="inline-block">
+            <label className="block text-sm font-medium text-gray-700 text-left">{property}</label>
             <input type="text" className="border border-gray-300 rounded p-2"
                 placeholder="Type to filter..."
                 value={filter}

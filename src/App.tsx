@@ -14,13 +14,27 @@ function App() {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
 
+  const footerModal = (
+    <div className="flex justify-center mt-2">
+      <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer"
+          onClick={() => setShowDialogModal(false)}>
+          Close
+      </button>
+    </div>
+  )
+
   return (
     <div>
       
-      <h1 className="text-3xl font-bold m-2">Different generic APIs and components</h1>
+      <h1 className="text-3xl font-bold">EXERCISE #1</h1>
+      <h2 className="text-2xl mb-4">Create a generic localStorage handler usable by React function component</h2>
       
       <FirstComponent />
       <SecondComponent />
+
+      <h1 className="text-3xl font-bold mt-4">EXERCISE #2</h1>
+      <h2 className="text-2xl mb-4">Create a generic dialog component that can be customized with any content</h2>
 
       <button className='rounded-2xl bg-gray-600 mx-2 px-4 text-white not-disabled:cursor-pointer disabled:bg-gray-400'
         onClick={() => setShowDialog(!showDialog)}>
@@ -35,19 +49,22 @@ function App() {
           <FirstComponent />
       </Dialog>
       
-      <Dialog modal={true} isOpen={showDialogModal} header={<strong>Modal Dialog Header</strong>} footer={<i>Dialog Footer</i>} onClose={() => setShowDialogModal(false)}>
+      <Dialog modal={true} isOpen={showDialogModal} header={<strong>Modal Dialog Header</strong>} footer={footerModal} onClose={() => setShowDialogModal(false)}>
           <FirstComponent />
       </Dialog>
 
-      <p>
-        { name.length > 0 && <p>Selected name: <strong>{name}</strong></p> }
-        <InputAutoFilter data={data} property='name' valueChange={setName} value={name}/>
-      </p>
+      <h1 className="text-3xl font-bold mt-4">EXERCISE #3</h1>
+      <h2 className="text-2xl mb-4">Create a generic auto-filter dropdown component to filter any kind of data</h2>
 
-      <p>
-        { phone.length > 0 && <p>Selected phone: <strong>{phone}</strong></p> }
+      <div>
+        <InputAutoFilter data={data} property='name' valueChange={setName} value={name}/>
+        { name.length > 0 && <p>Selected name: <strong>{name}</strong></p> }
+      </div>
+
+      <div>
         <InputAutoFilter data={data} property='phone' valueChange={setPhone} value={phone}/>
-      </p>
+        { phone.length > 0 && <p>Selected phone: <strong>{phone}</strong></p> }
+      </div>
 
     </div>
   )

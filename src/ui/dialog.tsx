@@ -25,13 +25,6 @@ export function Dialog({modal, isOpen, header, footer, onClose, children}: Props
                             </div>
                             <div>{children}</div>
                             <div>{footer}</div>
-                            <div className="flex justify-center mt-2">
-                                <button
-                                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer"
-                                    onClick={onClose}>
-                                    Close
-                                </button>
-                            </div>
                         </div> 
                     </div>
                 </div>
