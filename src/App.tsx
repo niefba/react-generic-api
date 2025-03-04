@@ -1,5 +1,5 @@
 import './App.css';
-import {useState} from 'react';
+import {useState, useEffect } from 'react';
 import {FirstComponent} from './ui/first-component';
 import {SecondComponent} from './ui/second-component';
 import { Dialog } from './ui/dialog';
@@ -13,6 +13,8 @@ function App() {
   const [showDialogModal, setShowDialogModal] = useState(false);
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
+  const [categories, setCategories] = useState([]);
+  const [category, setCategory] = useState('');
 
   const footerModal = (
     <div className="flex justify-center mt-2">
@@ -23,6 +25,20 @@ function App() {
       </button>
     </div>
   )
+
+  // API call to get the list of categories
+  useEffect(() => {
+    fetch('https://opentdb.com/api_category.php')
+    .then(response => response.json())
+    .then(data => {
+        if (data.trivia_categories) {
+            setCategories(data.trivia_categories);
+        }
+    })
+    .catch(error => {
+        console.log('Failed to retrieve categories: ' + error);
+    });
+  }, [])
 
   return (
     <div>
@@ -64,6 +80,11 @@ function App() {
       <div>
         <InputAutoFilter data={data} property='phone' valueChange={setPhone} value={phone}/>
         { phone.length > 0 && <p>Selected phone: <strong>{phone}</strong></p> }
+      </div>
+
+      <div>
+        <InputAutoFilter data={categories} property='name' valueChange={setCategory} value={category}/>
+        { category.length > 0 && <p>Selected category: <strong>{category}</strong></p> }
       </div>
 
     </div>
