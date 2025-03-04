@@ -1,12 +1,11 @@
 import {useState} from 'react';
 
-interface IStringIndex {
+interface Data {
     id: number,
-    name: string,
     [key: string]: number | string | object
 }
 
-export function InputAutoFilter({data, property, valueChange, value}: {data: IStringIndex[], property: string, valueChange: (value: string) => void, value: string}) {
+export function InputAutoFilter({data, property, valueChange, value}: {data: Data[], property: string, valueChange: (value: string) => void, value: string}) {
     const [filter, setFilter] = useState('');
 
     const selectValue = (value: string) => {
@@ -27,18 +26,21 @@ export function InputAutoFilter({data, property, valueChange, value}: {data: ISt
             <div className='relative'>
                 <ul className="absolute border bg-white border-gray-300 rounded">
                     {data.filter((item)=> {
-                        // filter should not be case-sensitive
+                        // Filter should not be case-sensitive
                         const regexp = new RegExp('' + filter, 'gi');
                         return typeof item[property] == 'string' && item[property].match(regexp)}
                         ).map((item) => {
+                            // Retrieve the value of the corresponding property
                             const value = item[property];
                             if (typeof value == 'string') {
+                                // Split the value into parts to highlight the filter in bold
                                 const regexp = new RegExp('' + filter, 'gi');
                                 const parts = value.split(regexp);
                                 let position = 0;
                                 return (
                                     <li key={item.id} className="p-2">
                                         {parts.map((part, index) => {
+                                            // Retrieve the glue between the parts from the original value to fit case-sensitive
                                             const glue = value.slice(position + part.length, position + part.length + filter.length);
                                             position += (filter.length + part.length);
                                             return (

@@ -1,7 +1,7 @@
 import './App.css';
 import {useState, useEffect } from 'react';
-import {FirstComponent} from './ui/first-component';
-import {SecondComponent} from './ui/second-component';
+import {StoreKey} from './ui/store-key';
+import {ReadKey} from './ui/read-key';
 import { Dialog } from './ui/dialog';
 import { InputAutoFilter } from './ui/input-auto-filter';
 import data from './test/data.json';
@@ -46,8 +46,15 @@ function App() {
       <h1 className="text-3xl font-bold">EXERCISE #1</h1>
       <h2 className="text-2xl mb-4">Create a generic localStorage handler usable by React function component</h2>
       
-      <FirstComponent />
-      <SecondComponent />
+      <div className='border border-gray-400 rounded p-2 m-2'>
+        <h2>Component that set a value for 'mykey' in localStorage using the API</h2>
+        <StoreKey name='myKey' />
+      </div>
+
+      <div className='border border-gray-400 rounded p-2 m-2'>
+        <h2>Component that receive any update of 'mykey' and display it instantly</h2>
+        <ReadKey name='myKey' />
+      </div>
 
       <h1 className="text-3xl font-bold mt-4">EXERCISE #2</h1>
       <h2 className="text-2xl mb-4">Create a generic dialog component that can be customized with any content</h2>
@@ -62,11 +69,11 @@ function App() {
       </button>
       
       <Dialog modal={false} isOpen={showDialog} header={<strong>Regular Dialog Header</strong>} footer={<i>Dialog Footer</i>} onClose={() => setShowDialog(false)}>
-          <FirstComponent />
+          <ReadKey name='myKey' />
       </Dialog>
       
       <Dialog modal={true} isOpen={showDialogModal} header={<strong>Modal Dialog Header</strong>} footer={footerModal} onClose={() => setShowDialogModal(false)}>
-          <FirstComponent />
+          <StoreKey name='myKey' />
       </Dialog>
 
       <h1 className="text-3xl font-bold mt-4">EXERCISE #3</h1>

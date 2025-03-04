@@ -4,13 +4,12 @@ import { useStore } from '../lib/useStore';
 /*
 * Component that set a value for 'myKey' in localStorage using the API
 */
-export function FirstComponent() {
-    const [myKey, setMyKey] = useStore('myKey');
+export function StoreKey({name}: {name: string}) {
+    const [myKey, setMyKey] = useStore(name);
     const [value, setValue] = useState('');
     return (
-      <div className='border border-gray-400 rounded p-2 m-2'>
-        <h2>Component that set a value for 'mykey' in localStorage using the API</h2>
-        <label className='p-2'>myKey</label>
+      <>
+        <label className='p-2'>{name}</label>
         <input
           className='rounded border border-gray-400 px-2'
           value={value}
@@ -23,6 +22,6 @@ export function FirstComponent() {
           }}>
           Apply
         </button>
-      </div>
+      </>
     );
 }
