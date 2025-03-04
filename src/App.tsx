@@ -11,7 +11,8 @@ import data from './test/data.json';
 function App() {
   const [showDialog, setShowDialog] = useState(false);
   const [showDialogModal, setShowDialogModal] = useState(false);
-
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
 
   return (
     <div>
@@ -38,17 +39,15 @@ function App() {
           <FirstComponent />
       </Dialog>
 
-      
-      
-      <p>Some content</p>
-      <p>Some content</p>
-      <p>Some content</p>
-      <p>Some content</p>
-      <p>Some content</p>
-      <p>Some content</p>
-      <p>Some content</p>
+      <p>
+        { name.length > 0 && <p>Selected name: <strong>{name}</strong></p> }
+        <InputAutoFilter data={data} property='name' valueChange={setName} value={name}/>
+      </p>
 
-      <InputAutoFilter data={data} property='name' />
+      <p>
+        { phone.length > 0 && <p>Selected phone: <strong>{phone}</strong></p> }
+        <InputAutoFilter data={data} property='phone' valueChange={setPhone} value={phone}/>
+      </p>
 
     </div>
   )
